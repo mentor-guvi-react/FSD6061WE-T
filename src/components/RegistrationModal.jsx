@@ -7,6 +7,7 @@ import {
   Button,
 } from "@mui/material";
 import { useState } from "react";
+import axios from 'axios';
 
 export default function RegistrationModal({ open, handleClose, modalType }) {
   const [formState, setFormState] = useState({
@@ -18,6 +19,25 @@ export default function RegistrationModal({ open, handleClose, modalType }) {
   });
 
 //   console.log(formState,'formState formState');
+
+
+const handleRegister = async () => {
+
+  if(modalType === 'register'){
+   const response =  await  axios.post( 'http://localhost:4000/register', formState);
+   if(response){
+    localStorage.setItem('username',response.data);
+    handleClose();
+   }
+  }
+  else {
+  const loginresponse =  await axios.post( 'http://localhost:4000/login', formState);
+    if('login success' === loginresponse.data){
+      localStorage.setItem('username',formState.username);
+      handleClose();
+    }
+  }
+}
 
   return (
     <Modal
@@ -126,7 +146,7 @@ export default function RegistrationModal({ open, handleClose, modalType }) {
             </>
           )}
 
-          <Button variant="contained">
+          <Button variant="contained" onClick={handleRegister}>
             {modalType === "register" ? `Sign Up` : `Sign In`}
           </Button>
         </Grid2>

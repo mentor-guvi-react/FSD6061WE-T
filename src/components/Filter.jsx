@@ -23,7 +23,7 @@ export default function Filter() {
         </AccordionSummary>
         <AccordionDetails>
           <FormGroup>
-            {quickfilter.map((element) => {
+            {quickFilter.map((element) => {
               return (
                 <FormControlLabel control={<Checkbox />} label={element} />
               );
@@ -41,7 +41,7 @@ export default function Filter() {
         </AccordionSummary>
         <AccordionDetails>
           <FormGroup>
-            {cuisines.map((element) => {
+            {cuisniesFilter.map((element) => {
               return (
                 <FormControlLabel control={<Checkbox />} label={element} />
               );
@@ -59,7 +59,7 @@ export default function Filter() {
         </AccordionSummary>
         <AccordionDetails>
           <FormGroup>
-            {tags.map((element) => {
+            {tagsFilter.map((element) => {
               return (
                 <FormControlLabel control={<Checkbox />} label={element} />
               );
@@ -72,34 +72,79 @@ export default function Filter() {
 }
 
 
-const quickfilter = ["Pure Veg", "Outdoor Seating"];
-
-const cuisines = [
-  "North Indian",
-  "South Indian",
-  "Chinese",
-  "Italian",
-  "Mexican",
-  "Continental",
-  "Thai",
-  "American",
-  "Mughlai",
-  "Biryani",
-  "Bengali",
-  "Punjabi",
-  "Rajasthani",
-  "Maharashtrian",
-  "Gujarati",
-  "Goan",
-  "Kashmiri",
-  "Hyderabadi",
-  "Kerala",
-  "Andhra",
-  "Awadhi",
-  "Chettinad",
-  "Malwani",
-  "Mangalorean",
-  "Konkani",
+const quickFilter = [
+  `3 Star`,
+  `Buffet`,
+  `Chinese`,
+  `Dineout Pay`,
+  `Happy Hours`,
+  `Italian`,
+  `North Indian`,
+  `Pure Veg`,
 ];
 
-const tags = ["Buffet", "Happy Hours"];
+const cuisniesFilter = [
+  `American`,
+  `Bengali`,
+  `Cantonese`,
+  `European`,
+  `Greek`,
+  `Beverages`,
+  `Chettinad`,
+  `Gujarati`,
+  `Japanese`,
+  `Malaysian`,
+  `Moroccan`,
+  `Arabian`,
+  `Bihari`,
+  `Chinese`,
+  `Finger Food`,
+  `Health Food`,
+  `Kashmiri`,
+  `Mangalorean`,
+  `Mughlai`,
+  `Asian`,
+  `Biryani`,
+  `Continental`,
+  `French`,
+  `Hyderabadi`,
+  `Kerala`,
+  `Mediterranean`,
+  `Naga`,
+  `Assamese`,
+  `Burger`,
+  `Desserts`,
+  `Fusion`,
+  `Indonesian`,
+  `Korean`,
+  `Mexican`,
+  `Nepalese`,
+  `Awadhi`,
+  `Burmese`,
+  `Ethiopian`,
+  `Goan`,
+  `Iranian`,
+  `Lebanese`,
+  `North Eastern`,
+];
+
+const tagsFilter = [
+  `1 plus 1 on Food and Drinks`,
+  `Barbeque Nation Super Savers`,
+  `Best Buffet`,
+  `5 Star`,
+  `Bars`,
+  `Best Buffets`,
+  `Andaz Delhi`,
+  `Best All Day Dining`,
+  `Best Buffets and Thaalis`,
+  `BBQ Special`,
+  `Best Bars`,
+  `Best Burgers`,
+  `Bakery`,
+  `Best Bars and Pubs`,
+  `Best Cafes`,
+  `Bar`,
+  `Best Budget Friendly Restaurants`,
+  `Best Cafes to Chill`,
+];

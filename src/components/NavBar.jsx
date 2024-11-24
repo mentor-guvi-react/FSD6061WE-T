@@ -22,6 +22,14 @@ export default function NavBar() {
 
   const navigate =  useNavigate();
 
+  const username = localStorage.getItem('username');
+
+
+  const handleLogout = () => {
+    localStorage.removeItem('username');
+    window.location.reload();
+  }
+
   return (
     <Grid2 container>
       <AppBar position="static" color="transparent">
@@ -64,10 +72,10 @@ export default function NavBar() {
           </Grid2>
 
           <Grid2 item>
-            {false ? (
+            {username ? (
               <Grid2 container gap={2}>
                 <Button variant="contained">My Booking</Button>
-                <Button variant="contained">Logout</Button>
+                <Button variant="contained" onClick={handleLogout}>Logout</Button>
               </Grid2>
             ) : (
               <Grid2 container gap={2}>
@@ -113,3 +121,4 @@ const Locations = [
   { label: "Delhi", id: 123 },
   { label: "Mumbai", id: 987 },
 ];
+
