@@ -9,7 +9,7 @@ export default function HotelCards({ hotelData }) {
   const [modalState,setModalState] =  useState(false);
 
   const {location} = useParams()
-  const locationInformation = hotelData[location.toLowerCase()] || [];
+  const locationInformation = hotelData[location?.toLowerCase()] || [];
 
   const handleBookingModelOpen = (eachHotel) => {
     setModalState(eachHotel);
