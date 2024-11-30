@@ -6,13 +6,16 @@ import { useState } from "react";
 
 export default function HotelCards({ hotelData }) {
 
+  const username = localStorage.getItem("username");
   const [modalState,setModalState] =  useState(false);
 
   const {location} = useParams()
   const locationInformation = hotelData[location?.toLowerCase()] || [];
 
   const handleBookingModelOpen = (eachHotel) => {
-    setModalState(eachHotel);
+    if(username){
+      setModalState(eachHotel);
+    }
   }
 
   return (

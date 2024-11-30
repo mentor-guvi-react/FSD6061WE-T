@@ -27,6 +27,7 @@ const handleRegister = async () => {
    const response =  await  axios.post( 'http://localhost:4000/register', formState);
    if(response){
     localStorage.setItem('username',response.data);
+    window.location.reload();
     handleClose();
    }
   }
@@ -34,6 +35,7 @@ const handleRegister = async () => {
   const loginresponse =  await axios.post( 'http://localhost:4000/login', formState);
     if('login success' === loginresponse.data){
       localStorage.setItem('username',formState.username);
+      window.location.reload();
       handleClose();
     }
   }

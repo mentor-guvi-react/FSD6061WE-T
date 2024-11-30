@@ -7,13 +7,17 @@ import NavBar from "./components/NavBar";
 import HotelPage from "./components/HotelPage";
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { SnackbarProvider } from 'notistack';
+
 
 function App() {
   const MyComp = () => {
     return (
       <>
+       <SnackbarProvider maxSnack={3}>
         <NavBar />
         <HotelPage />
+        </SnackbarProvider>
       </>
     );
   };

@@ -16,7 +16,7 @@ import { useParams } from "react-router-dom";
 
 export default function HotelPage() {
   const [sort, setSort] = useState("Rating");
-  const { location } = useParams();
+  const { location = '' } = useParams();
 
   console.log(location, "window.location");
 
