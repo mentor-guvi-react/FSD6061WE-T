@@ -10,7 +10,7 @@ import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 
-export default function Filter() {
+export default function Filter({handleFilterChange}) {
   return (
     <div>
       <Accordion>
@@ -25,7 +25,7 @@ export default function Filter() {
           <FormGroup>
             {quickFilter.map((element) => {
               return (
-                <FormControlLabel control={<Checkbox />} label={element} />
+                <FormControlLabel value={element} onChange={handleFilterChange} control={<Checkbox />} label={element} />
               );
             })}
           </FormGroup>
@@ -43,7 +43,7 @@ export default function Filter() {
           <FormGroup>
             {cuisniesFilter.map((element) => {
               return (
-                <FormControlLabel control={<Checkbox />} label={element} />
+                <FormControlLabel value={element} onChange={handleFilterChange} control={<Checkbox />} label={element} />
               );
             })}
           </FormGroup>
@@ -61,7 +61,7 @@ export default function Filter() {
           <FormGroup>
             {tagsFilter.map((element) => {
               return (
-                <FormControlLabel control={<Checkbox />} label={element} />
+                <FormControlLabel value={element} onChange={handleFilterChange} control={<Checkbox />} label={element} />
               );
             })}
           </FormGroup>

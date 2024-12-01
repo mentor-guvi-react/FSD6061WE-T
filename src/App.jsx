@@ -7,17 +7,30 @@ import NavBar from "./components/NavBar";
 import HotelPage from "./components/HotelPage";
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { SnackbarProvider } from 'notistack';
+import { SnackbarProvider } from "notistack";
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
 
 
 function App() {
   const MyComp = () => {
+    const [searchedHotel, setSearchedHotel] = useState("");
     return (
       <>
-       <SnackbarProvider maxSnack={3}>
-        <NavBar />
-        <HotelPage />
+        <ThemeProvider theme={darkTheme}>
+        <CssBaseline />
+        <SnackbarProvider maxSnack={3}>
+          <NavBar setSearchedHotel={setSearchedHotel} />
+          <HotelPage searchedHotel={searchedHotel} />
         </SnackbarProvider>
+        </ThemeProvider>
       </>
     );
   };

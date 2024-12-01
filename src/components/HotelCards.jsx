@@ -4,13 +4,46 @@ import {useParams} from 'react-router-dom'
 import BookingModal from "./BookingModal";
 import { useState } from "react";
 
-export default function HotelCards({ hotelData }) {
-
+export default function HotelCards({ selectedTags,  hotelData ,sort,searchedHotel}) {
   const username = localStorage.getItem("username");
   const [modalState,setModalState] =  useState(false);
 
   const {location} = useParams()
-  const locationInformation = hotelData[location?.toLowerCase()] || [];
+
+
+  
+  let restaurentInfo = []
+  if(location?.toLowerCase()){
+    restaurentInfo = hotelData[location?.toLowerCase()]
+  }
+  else {
+    restaurentInfo = hotelData['delhi']
+  }
+
+  if(searchedHotel){    
+    restaurentInfo = restaurentInfo.filter(eachHotel => {
+        console.log(searchedHotel,'searchedHotel',eachHotel.name);
+        if(eachHotel.name.toLowerCase().includes(searchedHotel.toLowerCase()) ){
+          return true
+        }
+        return false
+      })
+  }
+
+
+  if(selectedTags?.length){
+    restaurentInfo = restaurentInfo.filter(eachHotel => {
+      let matchFound = false;
+      eachHotel.tags.forEach(ele => {
+        if(selectedTags.includes(ele)){
+          matchFound = true;
+        }
+      })
+      return matchFound
+    })
+  }
+  console.log(restaurentInfo,'restaurentInfo restaurentInfo');
+
 
   const handleBookingModelOpen = (eachHotel) => {
     if(username){
@@ -18,10 +51,27 @@ export default function HotelCards({ hotelData }) {
     }
   }
 
+  const handleRatingSort = (restaurentInfo) => {
+    restaurentInfo.sort( (a,b) => a.ratings > b.ratings ? -1 : 1)
+  }
+
+
+  if(sort ===  'Rating' ){
+      handleRatingSort(restaurentInfo)
+  }
+  else if(sort === 'Price High To Low'){
+    restaurentInfo.sort( (a,b) => a.price > b.price ? -1 : 1)
+  }
+  else if(sort === 'Price Low To High'){
+    restaurentInfo.sort( (a,b) => a.price > b.price ? 1 : -1)
+  }
+
+
+
   return (
     <>
      <Grid2 container gap={1}>
-      {locationInformation.map((eachHotel) => {
+      {restaurentInfo.map((eachHotel) => {
         const { id, name, location, price, tags, priceDetail, ratings, image } =
           eachHotel;
         return (

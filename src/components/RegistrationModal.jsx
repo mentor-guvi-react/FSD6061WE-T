@@ -24,7 +24,7 @@ export default function RegistrationModal({ open, handleClose, modalType }) {
 const handleRegister = async () => {
 
   if(modalType === 'register'){
-   const response =  await  axios.post( 'http://localhost:4000/register', formState);
+   const response =  await  axios.post( 'https://fsd6061we-t-node.onrender.com/register', formState);
    if(response){
     localStorage.setItem('username',response.data);
     window.location.reload();
@@ -32,7 +32,7 @@ const handleRegister = async () => {
    }
   }
   else {
-  const loginresponse =  await axios.post( 'http://localhost:4000/login', formState);
+  const loginresponse =  await axios.post( 'https://fsd6061we-t-node.onrender.com/login', formState);
     if('login success' === loginresponse.data){
       localStorage.setItem('username',formState.username);
       window.location.reload();

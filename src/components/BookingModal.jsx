@@ -15,6 +15,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import {  useSnackbar } from 'notistack';
+import { LoadingButton } from '@mui/lab';
 
 
 export default function BookingModal({ handleClose, modalState }) {
@@ -31,6 +32,7 @@ export default function BookingModal({ handleClose, modalState }) {
   });
 
   const [bookedTimeSlots , setbookedTimeSlots] = useState([])
+  const [isLoading,setIsLoading ] = useState(false)
 
   useEffect( () => {
     setBookingState({
@@ -73,6 +75,7 @@ export default function BookingModal({ handleClose, modalState }) {
   };
 
   const handleBooking = async () => {
+    setIsLoading(true);
     const { selectedDate, selectedTime, selectedSeats } = bookingState;
     if (
       username &&
@@ -82,7 +85,7 @@ export default function BookingModal({ handleClose, modalState }) {
       selectedSeats
     ) {
       const response = await axios.post(
-        "http://localhost:4000/create-booking",
+        "https://fsd6061we-t-node.onrender.com/create-booking",
         {
           username,
           hotelId: id,
@@ -95,6 +98,7 @@ export default function BookingModal({ handleClose, modalState }) {
         setBookingState({})
         handleClose();
         enqueueSnackbar('Booking Created successfully!', { variant:'success' });
+        setIsLoading(false);
       }
     }
   };
@@ -102,7 +106,7 @@ export default function BookingModal({ handleClose, modalState }) {
 
   const getBookingSlots = async (selectedDate) => {
       try {
-        const response =   await axios.get(`http://localhost:4000/getBookingSlots/${id}/${selectedDate}`);
+        const response =   await axios.get(`https://fsd6061we-t-node.onrender.com/getBookingSlots/${id}/${selectedDate}`);
         console.log(response.data,'response response response');
         if(response?.data?.length){
           const selectedtimes = response?.data.map(ele => ele.selectedTime);
@@ -190,9 +194,9 @@ export default function BookingModal({ handleClose, modalState }) {
           </Grid2>
 
           <Grid2 paddingBottom={4}>
-            <Button variant="contained" color="primary" onClick={handleBooking}>
-              Make a Booking
-            </Button>
+            <LoadingButton  loading={isLoading} variant="contained" color="primary" onClick={handleBooking}>
+             {'Make a Booking'}
+            </LoadingButton>
           </Grid2>
         </Grid2>
       </Box>

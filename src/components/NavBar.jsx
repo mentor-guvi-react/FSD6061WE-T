@@ -17,7 +17,7 @@ import BookingModal from "./UserBookingModal";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function NavBar() {
+export default function NavBar({setSearchedHotel}) {
   const [registrationModalOpen, setRegistrationModalOpen] = useState(false);
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
   const [modalType, setModalType] = useState("register");
@@ -62,6 +62,7 @@ export default function NavBar() {
           <Grid2 item>
             <FormControl variant="filled" style={{ width: 330 }}>
               <Input
+                onChange={(e) => setSearchedHotel(e.target.value)}
                 id="input-with-icon-adornment"
                 placeholder="Search for Restaurants"
                 startAdornment={

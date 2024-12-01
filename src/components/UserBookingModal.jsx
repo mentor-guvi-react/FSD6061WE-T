@@ -31,7 +31,7 @@ export default function UserBookingModal({ handleClose, open }) {
   const fetchBookingDetail = async () => {
     if (username) {
       const response = await axios.get(
-        "http://localhost:4000/bookingDetails/" + username
+        "https://fsd6061we-t-node.onrender.com/bookingDetails/" + username
       );
       if (response?.data) {
         setBookingData(response?.data);
@@ -42,7 +42,7 @@ export default function UserBookingModal({ handleClose, open }) {
   const handleCancel = async (cancelHotel) => {
     console.log(cancelHotel,'cancelHotel');
     try {
-       const response = await axios.put('http://localhost:4000/cancelBooking/'+cancelHotel._id);
+       const response = await axios.put('https://fsd6061we-t-node.onrender.com/cancelBooking/'+cancelHotel._id);
        console.log(response.data,'response');
        if(response.data === 'Booking cancelled'){
         enqueueSnackbar('Booking Cancelled successfully!', { variant:'error' });

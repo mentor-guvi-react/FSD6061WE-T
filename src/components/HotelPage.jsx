@@ -14,11 +14,22 @@ import { useState } from "react";
 
 import { useParams } from "react-router-dom";
 
-export default function HotelPage() {
+export default function HotelPage({searchedHotel}) {
   const [sort, setSort] = useState("Rating");
-  const { location = '' } = useParams();
+  const { location = "" } = useParams();
+const [selectedTags , setSelectedTags] = useState([]);
 
-  console.log(location, "window.location");
+
+  const handleFilterChange = (event) => {
+    if(  selectedTags.find(ele => ele === event.target.value)  ){
+        const updatedTags = selectedTags.filter(ele => ele !== event.target.value)
+        setSelectedTags( updatedTags )
+    }
+    else {
+      setSelectedTags( [ ...selectedTags, event.target.value] )
+    }
+  }
+
 
   return (
     <Grid2
@@ -30,7 +41,7 @@ export default function HotelPage() {
       marginTop={1}
     >
       <Grid2 width={"20%"}>
-        <Filter />
+        <Filter handleFilterChange={handleFilterChange} />
       </Grid2>
       <Grid2 container direction={"column"} spacing={2} width={"75%"}>
         <Grid2 container>
@@ -82,7 +93,7 @@ export default function HotelPage() {
         </Grid2>
 
         <Grid2 container>
-          <HotelCards hotelData={restaurant}></HotelCards>
+          <HotelCards selectedTags={selectedTags} sort={sort} hotelData={restaurant} searchedHotel={searchedHotel}></HotelCards>
         </Grid2>
       </Grid2>
     </Grid2>
@@ -285,7 +296,7 @@ const restaurant = {
       location: "Marine Drive, South Mumbai",
       price: "4000",
       priceDetail: "₹ 4,000 for 2 approx",
-      tags: ["Seafood", "Italian", "4 Star", "Buffet"],
+      tags: ["Seafood", "Italian", "4 Star", "Buffet" ,"Best Bars"],
       ratings: "9.0",
       image:
         "https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=800",
